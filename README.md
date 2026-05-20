@@ -755,7 +755,16 @@ SELECT
     RIGHT(StudentName, 3) AS LastThreeLetters
 FROM dbo.Students;
 ```
+---
 
+```sql
+SELECT 
+    LEFT(cr_issue,6) AS cr_len5,
+    COUNT(*) AS total_records
+FROM step_03_payments_combined
+WHERE cr_issue IS NOT NULL
+GROUP BY LEFT(cr_issue, 6);
+```
 ---
 
 ## 38. SUBSTRING
