@@ -834,7 +834,7 @@ SELECT
     o.OrderID,
     o.Amount
 FROM dbo.Customers c
-INNER JOIN dbo.Orders o
+INNER JOIN dbo.Orders o    --A n b
     ON c.CustomerID = o.CustomerID;
 ```
 
@@ -849,7 +849,7 @@ SELECT
     a.column_name,
     b.column_name
 FROM table1 a
-LEFT JOIN table2 b
+LEFT JOIN table2 b    -- A + (A ∩ B)   --KEEP ALL  A   AND PICK FROM B WHERE MTACH
     ON a.common_column = b.common_column;
 ```
 
