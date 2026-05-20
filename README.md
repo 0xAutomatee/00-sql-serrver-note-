@@ -944,6 +944,28 @@ CROSS JOIN dbo.Courses c;
 
 ---
 
+## 44 B. SELF JOIN
+
+### Definition:
+A **SELF JOIN** is a join in which a table is joined with itself.  
+It is used when you need to compare rows within the same table or find relationships inside a single table.
+
+---
+
+### Syntax:
+
+```sql
+SELECT
+    a.column_name,
+    b.column_name
+FROM table_name a
+JOIN table_name b
+    ON a.common_column = b.common_column;
+```
+
+---
+
+
 ## 45. UNION ALL
 
 **Syntax:**
