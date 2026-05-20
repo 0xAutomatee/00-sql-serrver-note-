@@ -786,6 +786,14 @@ FROM dbo.Students;
 
 ---
 
+```sql
+SELECT
+    SUBSTRING(StudentName, 2, 4) AS NamePart -- ( "google = 123456"  , "2,4 =234") =  oog 
+FROM dbo.Students;
+```
+
+---
+
 ## 39. REPLACE
 
 **Syntax:**
