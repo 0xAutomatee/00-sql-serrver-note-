@@ -2858,3 +2858,1521 @@ HAVING SUM(TRY_CAST(o.amount AS decimal(18,2))) > 100
 ORDER BY
     c.customer_name ASC,
     amount DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# MS SQL Server - A to Z Syntax Practice
+
+**Format:** SQL  
+**Level:** Beginner  
+**Tables:** Sample names only  
+**Style:** Small chunks  
+
+---
+
+## 01. BASIC SELECT
+
+**Purpose:** Show data from a table.
+
+```sql
+SELECT *
+FROM dbo.sample_table;
+```
+
+---
+
+## 02. SELECT SPECIFIC COLUMNS
+
+**Purpose:** Show only selected columns.
+
+```sql
+SELECT
+    id,
+    customer_name,
+    amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 03. COLUMN ALIAS
+
+**Purpose:** Rename column in output.
+
+```sql
+SELECT
+    customer_name AS [Customer Name],
+    amount        AS [Total Amount]
+FROM dbo.sample_table;
+```
+
+---
+
+## 04. WHERE
+
+**Purpose:** Filter rows.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE amount > 100;
+```
+
+---
+
+## 05. WHERE WITH TEXT
+
+**Purpose:** Filter text value.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE customer_name = 'Ali';
+```
+
+---
+
+## 06. WHERE WITH MULTIPLE CONDITIONS
+
+**Purpose:** AND means both conditions must be true.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE amount > 100
+  AND status = 'Active';
+```
+
+---
+
+## 07. OR CONDITION
+
+**Purpose:** Any one condition can be true.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE status = 'Active'
+   OR status = 'Pending';
+```
+
+---
+
+## 08. IN
+
+**Purpose:** Match multiple values.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE status IN ('Active', 'Pending', 'Hold');
+```
+
+---
+
+## 09. NOT IN
+
+**Purpose:** Exclude multiple values.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE status NOT IN ('Cancel', 'Delete');
+```
+
+---
+
+## 10. LIKE
+
+**Purpose:** Search text pattern.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE customer_name LIKE 'A%';
+```
+
+---
+
+## 11. LIKE CONTAINS
+
+**Purpose:** Search text anywhere.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE customer_name LIKE '%Ali%';
+```
+
+---
+
+## 12. IS NULL
+
+**Purpose:** Find blank/null values.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE invoice_number IS NULL;
+```
+
+---
+
+## 13. IS NOT NULL
+
+**Purpose:** Find rows where value exists.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE invoice_number IS NOT NULL;
+```
+
+---
+
+## 14. ORDER BY ASC
+
+**Purpose:** Sort small to big / A to Z.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+ORDER BY amount ASC;
+```
+
+---
+
+## 15. ORDER BY DESC
+
+**Purpose:** Sort big to small / Z to A.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+ORDER BY amount DESC;
+```
+
+---
+
+## 16. TOP
+
+**Purpose:** Show limited rows.
+
+```sql
+SELECT TOP 10 *
+FROM dbo.sample_table;
+```
+
+---
+
+## 17. DISTINCT
+
+**Purpose:** Remove duplicate values.
+
+```sql
+SELECT DISTINCT
+    status
+FROM dbo.sample_table;
+```
+
+---
+
+## 18. COUNT
+
+**Purpose:** Count rows.
+
+```sql
+SELECT
+    COUNT(*) AS total_rows
+FROM dbo.sample_table;
+```
+
+---
+
+## 19. SUM
+
+**Purpose:** Add values.
+
+```sql
+SELECT
+    SUM(amount) AS total_amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 20. AVG
+
+**Purpose:** Average value.
+
+```sql
+SELECT
+    AVG(amount) AS average_amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 21. MIN AND MAX
+
+**Purpose:** Lowest and highest value.
+
+```sql
+SELECT
+    MIN(amount) AS minimum_amount,
+    MAX(amount) AS maximum_amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 22. GROUP BY
+
+**Purpose:** Make totals by group.
+
+```sql
+SELECT
+    status,
+    SUM(amount) AS total_amount
+FROM dbo.sample_table
+GROUP BY status;
+```
+
+---
+
+## 23. GROUP BY WITH COUNT
+
+**Purpose:** Count rows by group.
+
+```sql
+SELECT
+    status,
+    COUNT(*) AS total_count
+FROM dbo.sample_table
+GROUP BY status;
+```
+
+---
+
+## 24. HAVING
+
+**Purpose:** Filter after GROUP BY.
+
+```sql
+SELECT
+    status,
+    SUM(amount) AS total_amount
+FROM dbo.sample_table
+GROUP BY status
+HAVING SUM(amount) > 1000;
+```
+
+---
+
+## 25. CASE
+
+**Purpose:** Make IF ELSE logic.
+
+```sql
+SELECT
+    customer_name,
+    amount,
+    CASE
+        WHEN amount > 1000 THEN 'Big Amount'
+        WHEN amount > 500  THEN 'Medium Amount'
+        ELSE 'Small Amount'
+    END AS amount_type
+FROM dbo.sample_table;
+```
+
+---
+
+## 26. ISNULL
+
+**Purpose:** Replace NULL with value.
+
+```sql
+SELECT
+    customer_name,
+    ISNULL(invoice_number, 'No Invoice') AS invoice_number
+FROM dbo.sample_table;
+```
+
+---
+
+## 27. COALESCE
+
+**Purpose:** Pick first non-null value.
+
+```sql
+SELECT
+    COALESCE(invoice_number, order_number, 'No Value') AS final_value
+FROM dbo.sample_table;
+```
+
+---
+
+## 28. CAST
+
+**Purpose:** Convert data type.
+
+```sql
+SELECT
+    CAST(amount AS decimal(18,2)) AS amount_decimal
+FROM dbo.sample_table;
+```
+
+---
+
+## 29. TRY_CAST
+
+**Purpose:** Safe convert. Bad value becomes NULL.
+
+```sql
+SELECT
+    TRY_CAST(amount AS decimal(18,2)) AS safe_amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 30. CONVERT DATE
+
+**Purpose:** Convert text to date.
+
+```sql
+SELECT
+    TRY_CONVERT(date, order_date) AS clean_date
+FROM dbo.sample_table;
+```
+
+---
+
+## 31. FORMAT DATE
+
+**Purpose:** Show date in month-year format.
+
+```sql
+SELECT
+    FORMAT(TRY_CONVERT(date, order_date), 'MMM-yy') AS month_year
+FROM dbo.sample_table;
+```
+
+---
+
+## 32. DATEPART
+
+**Purpose:** Get part of date.
+
+```sql
+SELECT
+    DATEPART(YEAR, TRY_CONVERT(date, order_date))  AS order_year,
+    DATEPART(MONTH, TRY_CONVERT(date, order_date)) AS order_month
+FROM dbo.sample_table;
+```
+
+---
+
+## 33. GETDATE
+
+**Purpose:** Current date and time.
+
+```sql
+SELECT
+    GETDATE() AS current_datetime;
+```
+
+---
+
+## 34. STRING CONCAT
+
+**Purpose:** Join text values.
+
+```sql
+SELECT
+    CONCAT(customer_name, ' - ', invoice_number) AS customer_invoice
+FROM dbo.sample_table;
+```
+
+---
+
+## 35. LTRIM RTRIM
+
+**Purpose:** Remove extra spaces.
+
+```sql
+SELECT
+    LTRIM(RTRIM(customer_name)) AS clean_customer_name
+FROM dbo.sample_table;
+```
+
+---
+
+## 36. LEN
+
+**Purpose:** Count text length.
+
+```sql
+SELECT
+    customer_name,
+    LEN(customer_name) AS name_length
+FROM dbo.sample_table;
+```
+
+---
+
+## 37. LEFT RIGHT SUBSTRING
+
+**Purpose:** Pick part of text.
+
+```sql
+SELECT
+    LEFT(customer_name, 3)         AS first_3_letters,
+    RIGHT(customer_name, 3)        AS last_3_letters,
+    SUBSTRING(customer_name, 2, 4) AS middle_letters
+FROM dbo.sample_table;
+```
+
+---
+
+## 38. REPLACE
+
+**Purpose:** Replace text.
+
+```sql
+SELECT
+    REPLACE(customer_name, 'Ali', 'Ahmed') AS updated_name
+FROM dbo.sample_table;
+```
+
+---
+
+## 39. INNER JOIN
+
+**Purpose:** Only matching rows from both tables.
+
+```sql
+SELECT
+    a.id,
+    a.customer_name,
+    b.order_number,
+    b.amount
+FROM dbo.customers a
+INNER JOIN dbo.orders b
+    ON a.id = b.customer_id;
+```
+
+---
+
+## 40. LEFT JOIN
+
+**Purpose:** All rows from left table + matching from right.
+
+```sql
+SELECT
+    a.id,
+    a.customer_name,
+    b.order_number,
+    b.amount
+FROM dbo.customers a
+LEFT JOIN dbo.orders b
+    ON a.id = b.customer_id;
+```
+
+---
+
+## 41. RIGHT JOIN
+
+**Purpose:** All rows from right table + matching from left.
+
+```sql
+SELECT
+    a.id,
+    a.customer_name,
+    b.order_number,
+    b.amount
+FROM dbo.customers a
+RIGHT JOIN dbo.orders b
+    ON a.id = b.customer_id;
+```
+
+---
+
+## 42. FULL OUTER JOIN
+
+**Purpose:** All rows from both tables.
+
+```sql
+SELECT
+    a.id,
+    a.customer_name,
+    b.order_number,
+    b.amount
+FROM dbo.customers a
+FULL OUTER JOIN dbo.orders b
+    ON a.id = b.customer_id;
+```
+
+---
+
+## 43. CROSS JOIN
+
+**Purpose:** Every row from table A joins every row from table B.
+
+```sql
+SELECT
+    a.customer_name,
+    b.product_name
+FROM dbo.customers a
+CROSS JOIN dbo.products b;
+```
+
+---
+
+## 44. UNION ALL
+
+**Purpose:** Combine results and keep duplicates.
+
+```sql
+SELECT customer_name
+FROM dbo.customers_2025
+
+UNION ALL
+
+SELECT customer_name
+FROM dbo.customers_2026;
+```
+
+---
+
+## 45. UNION
+
+**Purpose:** Combine results and remove duplicates.
+
+```sql
+SELECT customer_name
+FROM dbo.customers_2025
+
+UNION
+
+SELECT customer_name
+FROM dbo.customers_2026;
+```
+
+---
+
+## 46. CTE
+
+**Purpose:** Temporary named result.
+
+```sql
+;WITH sales_cte AS
+(
+    SELECT
+        customer_id,
+        SUM(amount) AS total_amount
+    FROM dbo.orders
+    GROUP BY customer_id
+)
+SELECT *
+FROM sales_cte;
+```
+
+---
+
+## 47. CTE WITH JOIN
+
+**Purpose:** Use CTE result with another table.
+
+```sql
+;WITH sales_cte AS
+(
+    SELECT
+        customer_id,
+        SUM(amount) AS total_amount
+    FROM dbo.orders
+    GROUP BY customer_id
+)
+SELECT
+    c.customer_name,
+    s.total_amount
+FROM sales_cte s
+INNER JOIN dbo.customers c
+    ON s.customer_id = c.id;
+```
+
+---
+
+## 48. SUBQUERY
+
+**Purpose:** Query inside query.
+
+```sql
+SELECT *
+FROM dbo.orders
+WHERE amount >
+(
+    SELECT AVG(amount)
+    FROM dbo.orders
+);
+```
+
+---
+
+## 49. EXISTS
+
+**Purpose:** Check if matching row exists.
+
+```sql
+SELECT *
+FROM dbo.customers c
+WHERE EXISTS
+(
+    SELECT 1
+    FROM dbo.orders o
+    WHERE o.customer_id = c.id
+);
+```
+
+---
+
+## 50. NOT EXISTS
+
+**Purpose:** Find rows with no match.
+
+```sql
+SELECT *
+FROM dbo.customers c
+WHERE NOT EXISTS
+(
+    SELECT 1
+    FROM dbo.orders o
+    WHERE o.customer_id = c.id
+);
+```
+
+---
+
+## 51. INSERT
+
+**Purpose:** Add new row.
+
+```sql
+INSERT INTO dbo.customers
+(
+    customer_name,
+    city,
+    status
+)
+VALUES
+(
+    'Ali',
+    'Lahore',
+    'Active'
+);
+```
+
+---
+
+## 52. INSERT MULTIPLE ROWS
+
+**Purpose:** Add many rows.
+
+```sql
+INSERT INTO dbo.customers
+(
+    customer_name,
+    city,
+    status
+)
+VALUES
+('Ali',   'Lahore',    'Active'),
+('Ahmed', 'Karachi',   'Active'),
+('Sara',  'Islamabad', 'Pending');
+```
+
+---
+
+## 53. UPDATE
+
+**Purpose:** Change existing data.
+
+```sql
+UPDATE dbo.customers
+SET status = 'Active'
+WHERE customer_name = 'Ali';
+```
+
+---
+
+## 54. UPDATE MULTIPLE COLUMNS
+
+**Purpose:** Change more than one column.
+
+```sql
+UPDATE dbo.customers
+SET
+    city = 'Lahore',
+    status = 'Active'
+WHERE id = 1;
+```
+
+---
+
+## 55. UPDATE WITH JOIN
+
+**Purpose:** Update using another table.
+
+```sql
+UPDATE c
+SET c.total_amount = o.total_amount
+FROM dbo.customers c
+INNER JOIN
+(
+    SELECT
+        customer_id,
+        SUM(amount) AS total_amount
+    FROM dbo.orders
+    GROUP BY customer_id
+) o
+    ON c.id = o.customer_id;
+```
+
+---
+
+## 56. DELETE
+
+**Purpose:** Delete rows.
+
+```sql
+DELETE FROM dbo.customers
+WHERE status = 'Delete';
+```
+
+---
+
+## 57. CREATE TABLE
+
+**Purpose:** Make new table.
+
+```sql
+CREATE TABLE dbo.sample_new_table
+(
+    id            INT IDENTITY(1,1) PRIMARY KEY,
+    customer_name VARCHAR(100),
+    amount        DECIMAL(18,2),
+    order_date    DATE,
+    status        VARCHAR(50)
+);
+```
+
+---
+
+## 58. DROP TABLE
+
+**Purpose:** Delete table completely.
+
+```sql
+DROP TABLE IF EXISTS dbo.sample_new_table;
+```
+
+---
+
+## 59. ALTER TABLE ADD COLUMN
+
+**Purpose:** Add new column.
+
+```sql
+ALTER TABLE dbo.customers
+ADD phone_number VARCHAR(50);
+```
+
+---
+
+## 60. ALTER TABLE ALTER COLUMN
+
+**Purpose:** Change column data type.
+
+```sql
+ALTER TABLE dbo.customers
+ALTER COLUMN phone_number VARCHAR(100);
+```
+
+---
+
+## 61. ALTER TABLE DROP COLUMN
+
+**Purpose:** Remove column.
+
+```sql
+ALTER TABLE dbo.customers
+DROP COLUMN phone_number;
+```
+
+---
+
+## 62. SELECT INTO
+
+**Purpose:** Create new table from query result.
+
+```sql
+SELECT
+    customer_id,
+    SUM(amount) AS total_amount
+INTO dbo.customer_sales_summary
+FROM dbo.orders
+GROUP BY customer_id;
+```
+
+---
+
+## 63. TEMP TABLE
+
+**Purpose:** Temporary table.
+
+```sql
+CREATE TABLE #temp_sales
+(
+    customer_id INT,
+    total_amount DECIMAL(18,2)
+);
+
+INSERT INTO #temp_sales
+SELECT
+    customer_id,
+    SUM(amount)
+FROM dbo.orders
+GROUP BY customer_id;
+
+SELECT *
+FROM #temp_sales;
+```
+
+---
+
+## 64. VIEW
+
+**Purpose:** Saved SELECT query.
+
+```sql
+CREATE VIEW dbo.vw_customer_sales
+AS
+SELECT
+    c.customer_name,
+    SUM(o.amount) AS total_amount
+FROM dbo.customers c
+INNER JOIN dbo.orders o
+    ON c.id = o.customer_id
+GROUP BY c.customer_name;
+```
+
+---
+
+## 65. USE VIEW
+
+**Purpose:** Read view like table.
+
+```sql
+SELECT *
+FROM dbo.vw_customer_sales;
+```
+
+---
+
+## 66. STORED PROCEDURE
+
+**Purpose:** Saved SQL work.
+
+```sql
+CREATE PROCEDURE dbo.sp_show_customers
+AS
+BEGIN
+    SELECT *
+    FROM dbo.customers;
+END;
+```
+
+---
+
+## 67. EXEC PROCEDURE
+
+**Purpose:** Run stored procedure.
+
+```sql
+EXEC dbo.sp_show_customers;
+```
+
+---
+
+## 68. PROCEDURE WITH PARAMETER
+
+**Purpose:** Send value into procedure.
+
+```sql
+CREATE PROCEDURE dbo.sp_customer_by_status
+    @status VARCHAR(50)
+AS
+BEGIN
+    SELECT *
+    FROM dbo.customers
+    WHERE status = @status;
+END;
+```
+
+---
+
+## 69. EXEC PROCEDURE WITH PARAMETER
+
+**Purpose:** Run procedure with value.
+
+```sql
+EXEC dbo.sp_customer_by_status @status = 'Active';
+```
+
+---
+
+## 70. VARIABLE
+
+**Purpose:** Store value.
+
+```sql
+DECLARE @amount DECIMAL(18,2);
+
+SET @amount = 1000;
+
+SELECT @amount AS my_amount;
+```
+
+---
+
+## 71. IF ELSE
+
+**Purpose:** Conditional logic.
+
+```sql
+DECLARE @total DECIMAL(18,2);
+
+SET @total = 500;
+
+IF @total > 1000
+BEGIN
+    SELECT 'Big Amount' AS result;
+END
+ELSE
+BEGIN
+    SELECT 'Small Amount' AS result;
+END;
+```
+
+---
+
+## 72. WHILE LOOP
+
+**Purpose:** Repeat work.
+
+```sql
+DECLARE @counter INT;
+
+SET @counter = 1;
+
+WHILE @counter <= 5
+BEGIN
+    SELECT @counter AS current_number;
+
+    SET @counter = @counter + 1;
+END;
+```
+
+---
+
+## 73. TRY CATCH
+
+**Purpose:** Handle errors.
+
+```sql
+BEGIN TRY
+
+    SELECT 10 / 0 AS result;
+
+END TRY
+BEGIN CATCH
+
+    SELECT
+        ERROR_MESSAGE() AS error_message,
+        ERROR_LINE()    AS error_line;
+
+END CATCH;
+```
+
+---
+
+## 74. TRANSACTION
+
+**Purpose:** Save changes.
+
+```sql
+BEGIN TRANSACTION;
+
+UPDATE dbo.customers
+SET status = 'Active'
+WHERE id = 1;
+
+COMMIT TRANSACTION;
+```
+
+---
+
+## 75. TRANSACTION WITH ROLLBACK
+
+**Purpose:** Undo changes if needed.
+
+```sql
+BEGIN TRANSACTION;
+
+UPDATE dbo.customers
+SET status = 'Wrong'
+WHERE id = 1;
+
+ROLLBACK TRANSACTION;
+```
+
+---
+
+## 76. ROW_NUMBER
+
+**Purpose:** Give row numbers.
+
+```sql
+SELECT
+    ROW_NUMBER() OVER (ORDER BY amount DESC) AS row_no,
+    customer_name,
+    amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 77. RANK
+
+**Purpose:** Ranking with gaps.
+
+```sql
+SELECT
+    RANK() OVER (ORDER BY amount DESC) AS rank_no,
+    customer_name,
+    amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 78. PARTITION BY
+
+**Purpose:** Row number inside each group.
+
+```sql
+SELECT
+    ROW_NUMBER() OVER
+    (
+        PARTITION BY status
+        ORDER BY amount DESC
+    ) AS row_no,
+    status,
+    customer_name,
+    amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 79. PIVOT
+
+**Purpose:** Convert rows into columns.
+
+```sql
+SELECT *
+FROM
+(
+    SELECT
+        customer_name,
+        status,
+        amount
+    FROM dbo.sample_table
+) src
+PIVOT
+(
+    SUM(amount)
+    FOR status IN ([Active], [Pending], [Hold])
+) p;
+```
+
+---
+
+## 80. STRING_AGG
+
+**Purpose:** Combine many row values into one text.
+
+```sql
+SELECT
+    STRING_AGG(customer_name, ', ') AS all_customers
+FROM dbo.customers;
+```
+
+---
+
+## 81. QUOTENAME
+
+**Purpose:** Safely make column name.
+
+```sql
+SELECT
+    QUOTENAME('IN#12345') AS safe_column_name;
+```
+
+---
+
+## 82. DYNAMIC SQL
+
+**Purpose:** Build SQL query as text and run it.
+
+```sql
+DECLARE @sql NVARCHAR(MAX);
+
+SET @sql = N'
+SELECT *
+FROM dbo.customers
+WHERE status = ''Active'';
+';
+
+PRINT @sql;
+
+EXEC sp_executesql @sql;
+```
+
+---
+
+## 83. DYNAMIC SQL WITH VARIABLE
+
+**Purpose:** Pass value safely.
+
+```sql
+DECLARE @sql2 NVARCHAR(MAX);
+DECLARE @status VARCHAR(50);
+
+SET @status = 'Active';
+
+SET @sql2 = N'
+SELECT *
+FROM dbo.customers
+WHERE status = @p_status;
+';
+
+EXEC sp_executesql
+    @sql2,
+    N'@p_status VARCHAR(50)',
+    @p_status = @status;
+```
+
+---
+
+## 84. CREATE INDEX
+
+**Purpose:** Make search faster.
+
+```sql
+CREATE INDEX IX_orders_customer_id
+ON dbo.orders(customer_id);
+```
+
+---
+
+## 85. DROP INDEX
+
+**Purpose:** Remove index.
+
+```sql
+DROP INDEX IX_orders_customer_id
+ON dbo.orders;
+```
+
+---
+
+## 86. PRIMARY KEY
+
+**Purpose:** Unique main ID.
+
+```sql
+CREATE TABLE dbo.sample_pk_table
+(
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(100)
+);
+```
+
+---
+
+## 87. FOREIGN KEY
+
+**Purpose:** Link child table with parent table.
+
+```sql
+CREATE TABLE dbo.sample_child_table
+(
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    customer_id INT,
+    amount DECIMAL(18,2),
+
+    CONSTRAINT FK_sample_child_customer
+    FOREIGN KEY (customer_id)
+    REFERENCES dbo.sample_pk_table(id)
+);
+```
+
+---
+
+## 88. DEFAULT VALUE
+
+**Purpose:** Auto value if user does not give value.
+
+```sql
+CREATE TABLE dbo.sample_default_table
+(
+    id INT IDENTITY(1,1),
+    status VARCHAR(50) DEFAULT 'Active'
+);
+```
+
+---
+
+## 89. CHECK CONSTRAINT
+
+**Purpose:** Allow only valid values.
+
+```sql
+CREATE TABLE dbo.sample_check_table
+(
+    id INT IDENTITY(1,1),
+    amount DECIMAL(18,2),
+
+    CONSTRAINT CK_amount_positive
+    CHECK (amount >= 0)
+);
+```
+
+---
+
+## 90. UNIQUE CONSTRAINT
+
+**Purpose:** No duplicate value allowed.
+
+```sql
+CREATE TABLE dbo.sample_unique_table
+(
+    id INT IDENTITY(1,1),
+    email VARCHAR(100) UNIQUE
+);
+```
+
+---
+
+## 91. MERGE
+
+**Purpose:** Insert or update in one statement.
+
+```sql
+MERGE dbo.customers AS target
+USING dbo.new_customers AS source
+    ON target.id = source.id
+WHEN MATCHED THEN
+    UPDATE SET
+        target.customer_name = source.customer_name,
+        target.status = source.status
+WHEN NOT MATCHED THEN
+    INSERT
+    (
+        customer_name,
+        status
+    )
+    VALUES
+    (
+        source.customer_name,
+        source.status
+    );
+```
+
+---
+
+## 92. OFFSET FETCH
+
+**Purpose:** Pagination.
+
+```sql
+SELECT *
+FROM dbo.customers
+ORDER BY id
+OFFSET 10 ROWS
+FETCH NEXT 10 ROWS ONLY;
+```
+
+---
+
+## 93. BETWEEN
+
+**Purpose:** Range filter.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE amount BETWEEN 100 AND 500;
+```
+
+---
+
+## 94. DATE RANGE
+
+**Purpose:** Filter dates.
+
+```sql
+SELECT *
+FROM dbo.sample_table
+WHERE TRY_CONVERT(date, order_date) >= '2026-01-01'
+  AND TRY_CONVERT(date, order_date) <  '2026-02-01';
+```
+
+---
+
+## 95. ABS
+
+**Purpose:** Make negative number positive.
+
+```sql
+SELECT
+    amount,
+    ABS(amount) AS positive_amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 96. ROUND
+
+**Purpose:** Round number.
+
+```sql
+SELECT
+    amount,
+    ROUND(amount, 2) AS rounded_amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 97. NULLIF
+
+**Purpose:** Avoid divide by zero.
+
+```sql
+SELECT
+    amount,
+    quantity,
+    amount / NULLIF(quantity, 0) AS unit_amount
+FROM dbo.sample_table;
+```
+
+---
+
+## 98. IIF
+
+**Purpose:** Short IF condition.
+
+```sql
+SELECT
+    customer_name,
+    amount,
+    IIF(amount > 1000, 'Big', 'Small') AS amount_type
+FROM dbo.sample_table;
+```
+
+---
+
+## 99. DROP OBJECTS SAFELY
+
+**Purpose:** Clean sample objects.
+
+```sql
+DROP TABLE IF EXISTS dbo.sample_pk_table;
+DROP TABLE IF EXISTS dbo.sample_child_table;
+DROP TABLE IF EXISTS dbo.sample_default_table;
+DROP TABLE IF EXISTS dbo.sample_check_table;
+DROP TABLE IF EXISTS dbo.sample_unique_table;
+```
+
+---
+
+## 100. FINAL FULL STRUCTURE EXAMPLE
+
+**Purpose:** Common query head to body structure.
+
+```sql
+SELECT
+    c.customer_name,
+    c.city,
+    o.order_number,
+    TRY_CAST(o.amount AS decimal(18,2)) AS amount,
+
+    CASE
+        WHEN TRY_CAST(o.amount AS decimal(18,2)) > 1000 THEN 'Big'
+        WHEN TRY_CAST(o.amount AS decimal(18,2)) > 500  THEN 'Medium'
+        ELSE 'Small'
+    END AS amount_type,
+
+    FORMAT(TRY_CONVERT(date, o.order_date), 'MMM-yy') AS month_year
+
+FROM dbo.customers c
+
+INNER JOIN dbo.orders o
+    ON c.id = o.customer_id
+
+WHERE c.status = 'Active'
+  AND o.order_date IS NOT NULL
+
+GROUP BY
+    c.customer_name,
+    c.city,
+    o.order_number,
+    o.amount,
+    o.order_date
+
+HAVING SUM(TRY_CAST(o.amount AS decimal(18,2))) > 100
+
+ORDER BY
+    c.customer_name ASC,
+    amount DESC;
+```
